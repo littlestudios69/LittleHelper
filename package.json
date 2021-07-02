@@ -1,0 +1,38 @@
+{
+    "name": "defected-bot",
+    "version": "1.0.0",
+    "description": "Defected Bot is a Discord.js v12 bot template which features a command & event handler, command cooldown, changeable prefix with MongoDB & more.",
+    "main": "app.js",
+    "dependencies": {
+        "axios": "^0.21.0",
+        "cat-loggr": "^1.2.2",
+        "chalk": "^4.1.0",
+        "date": "^1.0.2",
+        "discord.js": "github:discordjs/discord.js",
+        "moment": "^2.29.1",
+        "mongoose": "^5.10.10",
+        "nodemon": "^2.0.9",
+        "path": "^0.12.7",
+        "slash-create": "^3.3.0"
+    },
+    "scripts": {
+        "start": "node app.js",
+        "dev": "nodemon --trace-warnings app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/dftd/defected-bot.git"
+    },
+    "keywords": [
+        "discord",
+        "discord.js",
+        "discord.js12",
+        "template"
+    ],
+    "author": "dftd",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/dftd/defected-bot/issues"
+    },
+    "homepage": "https://github.com/dftd/defected-bot#readme"
+}
