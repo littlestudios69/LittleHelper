@@ -21,7 +21,6 @@ module.exports.execute = async(bot, msg, args, data) => {
         .setAuthor('Command list')
         .setFooter(bot.config.credits)
         .setColor(bot.config.color);
-
     // Personally I would hardcode the help command, it gives much more flexibility than any of the automated options.
 
     let categories = await readdir('./commands/');
