@@ -36,18 +36,20 @@ module.exports.execute = async (bot, msg, args, data) => {
         let ampm = "";
         if (hour > 12) ampm = "pm";
         else ampm = "am";
-        let greeting
-        if (hour > 00) greeting = "Good Night"
+        let greeting = "Good Night"
         if (hour > 04) greeting = "Good Morning"
         if (hour > 12) greeting = "Good Day"
         if (hour > 18) greeting = "Good Evening"
         if (hour > 22) greeting = "Good Night"
+
+        let hourF; if(hour < 10){hourF = "0" + hour}else{hourF = hour}
+        let minuteF; if(minute < 10){minuteF = "0" + minute}else{minuteF = minute}
+        let secondF; if(second < 10){secondF = "0" + second}else{secondF = second}
+
         hour = hour - 12;
         const embed = new Discord.MessageEmbed()
             .setColor(bot.config.color)
-            //.setAuthor(``)
-            //.setTitle(``)
-            .setDescription(`**${greeting}, ${msg.author}! ${GeneralLines[Math.floor(Math.random()*GeneralLines.length)]}**\n\n**Current Time:** ${month}/${day}/${year} ${hour}:${minute}:${second}${ampm} \|\|*month/day/year*\|\|\n**Weather:** ${b.data.current.condition.text} at ${b.data.current.temp_c}°C / ${b.data.current.temp_f}°F | Feels like: ${b.data.current.feelslike_c}°C / ${b.data.current.feelslike_f}°F.\n\n**Reminders:**\n🔹 Looks like you don't have any reminders set for today.\n\n**Todo:**\n🔹 Thing 1\n🔹 Thing 2\n🔹 Thing 3`);
+            .setDescription(`**${greeting}, ${msg.author}! ${GeneralLines[Math.floor(Math.random()*GeneralLines.length)]}**\n\n**Current Time:** ${month}/${day}/${year} ${hourF}:${minuteF}:${secondF}${ampm}\n**Weather:** ${b.data.current.condition.text} at ${b.data.current.temp_c}°C / ${b.data.current.temp_f}°F | Feels like: ${b.data.current.feelslike_c}°C / ${b.data.current.feelslike_f}°F.\n\n**Reminders:**\n🔹 Looks like you don't have any reminders set for today.\n\n**Todo:**\n🔹 Thing 1\n🔹 Thing 2\n🔹 Thing 3`);
 
         return msg.channel.send({
             embeds: [embed]

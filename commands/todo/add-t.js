@@ -1,22 +1,6 @@
 const Discord = require('discord.js');
 const embeds = require('../../helpers/embeds.js');
-var moment = require('moment'); // require
-let date = new Date
-moment().format(); 
-
-moment.locale('en');
-function timeConverter(UNIX_timestamp) {
-    var a = new Date(UNIX_timestamp);
-    var months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'septemper', 'october', 'nevember', 'december'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec;
-    return time;
-}
+let date = new Date()
 
 module.exports = {
     name: 'add-d',
@@ -38,7 +22,7 @@ module.exports.execute = async(bot, msg, args, data) => {
         data.user.todos.push({
             name: args.join(" "),
             mark: "unfinished",
-            added: (moment(date.now)),
+            added: date.now,
             prior: "-"
         })
         data.user.save().then(()=>{
