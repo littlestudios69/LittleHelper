@@ -40,7 +40,7 @@ module.exports.execute = async(bot, msg, args, data) => {
             mark: "unfinished",
             added: (moment(date.now)),
             prior: "-"
-            })
+        })
         data.user.save().then(()=>{
             let embed = new Discord.MessageEmbed()
             .setColor('GREEN')
