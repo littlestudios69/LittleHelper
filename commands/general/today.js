@@ -13,40 +13,55 @@ module.exports = {
     ownerOnly: false
 }
 
-module.exports.execute = async(bot, msg, args, data) => {
+module.exports.execute = async (bot, msg, args, data) => {
 
     console.log(data.user)
+    require("axios")({
+        url: "http://api.weatherapi.com/v1/current.json?key=a815dcc598db4709869184846202108&q=" + data.user.city,
+        method: "GET"
+    }).then(b => {
+        console.log(b)
+        console.log(b.data.current)
 
-    let TimeSpecificLines = ["Good morning", "Good afternoon", "Good evening"];
-    let GeneralLines = ["What's cooking", "What's up"];
 
-    let CurrentTime = new Date().toLocaleString("en-US", { timeZone: "America/New_York" });
-    let time = new Date(CurrentTime);
+        let GeneralLines = ["What's cooking?", "What's up?"];
 
-    let [day, month, year, hour, minute, second] = [time.getDate(), time.getMonth(), time.getFullYear(), formatNumber(time.getHours()), formatNumber(time.getMinutes()), formatNumber(time.getSeconds())];
-    
-    let ampm = "";
-    if (hour > 12) ampm = "pm";
-    else ampm = "am";
+        let CurrentTime = new Date().toLocaleString("en-US", {
+            timeZone: b.data.location.tz_id
+        });
+        let time = new Date(CurrentTime);
 
-    hour = hour - 12;
-    const embed = new Discord.MessageEmbed()
-        .setColor(bot.config.color)
-        .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-        .setTitle(`Today's Information`)
-        .setDescription(`**Current Time:** ${month}/${day}/${year} ${hour}:${minute}:${second}${ampm}\n**Weather:** No data found for your area.\n\n**Reminders:**\n🔹 Looks like you don't have any reminders set for today.\n\n**Todo:**\n🔹 Thing 1\n🔹 Thing 2\n🔹 Thing 3`);
+        let [day, month, year, hour, minute, second] = [time.getDate(), time.getMonth(), time.getFullYear(), formatNumber(time.getHours()), formatNumber(time.getMinutes()), formatNumber(time.getSeconds())];
 
-    return msg.channel.send({ embeds: [embed] });
-    
-    
-    
+        let ampm = "";
+        if (hour > 12) ampm = "pm";
+        else ampm = "am";
+        let greeting
+        if (hour > 00) greeting = "Good Night"
+        if (hour > 04) greeting = "Good Morning"
+        if (hour > 12) greeting = "Good Day"
+        if (hour > 18) greeting = "Good Evening"
+        if (hour > 22) greeting = "Good Night"
+        hour = hour - 12;
+        const embed = new Discord.MessageEmbed()
+            .setColor(bot.config.color)
+            //.setAuthor(``)
+            //.setTitle(``)
+            .setDescription(`**${greeting}, ${msg.author}! ${GeneralLines[Math.floor(Math.random()*GeneralLines.length)]}**\n\n**Current Time:** ${month}/${day}/${year} ${hour}:${minute}:${second}${ampm} \|\|*month/day/year*\|\|\n**Weather:** ${b.data.current.condition.text} at ${b.data.current.temp_c}°C / ${b.data.current.temp_f}°F | Feels like: ${b.data.current.feelslike_c}°C / ${b.data.current.feelslike_f}°F.\n\n**Reminders:**\n🔹 Looks like you don't have any reminders set for today.\n\n**Todo:**\n🔹 Thing 1\n🔹 Thing 2\n🔹 Thing 3`);
+
+        return msg.channel.send({
+            embeds: [embed]
+        });
+
+    })
+
 }
 
 async function queryWeather(location, key) {
 
     let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${key}`);
     return await response.json();
-    
+
 }
 
 function formatNumber(number) {

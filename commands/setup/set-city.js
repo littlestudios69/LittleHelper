@@ -2,10 +2,10 @@ const Discord = require('discord.js');
 const embeds = require('../../helpers/embeds.js');
 
 module.exports = {
-    name: 'add-n',
-    description: 'Add a Note.',
-    usage: 'add-n <note>',
-    aliases: ["an", "notes-add", "add-note"],
+    name: 'set-city',
+    description: 'Add a City.',
+    usage: 'set-city <city>',
+    aliases: ["set-c", "city", "stst"],
     permissions: [],
     botPermissions: [],
     nsfw: false,
@@ -16,15 +16,14 @@ module.exports = {
 module.exports.execute = async(bot, msg, args, data) => {
     try{
     if(!args[0]){
-        return embeds.args(msg, "Note")
+        return embeds.args(msg, "city")
     }else {
-        data.user.notes.push(args.join(" "))
-        
+        data.user.city = args.join(" ")
         data.user.save().then(()=>{
             let embed = new Discord.MessageEmbed()
             .setColor('GREEN')
-            .setTitle('Added Note!')
-            .setDescription(`The Note "\`${args.join(" ")}\`" has been added successfully!`);
+            .setTitle('Updated City!')
+            .setDescription(`The City has been added successfully set to "\`${args.join(" ")}\`"!`);
     
         return msg.channel.send({embeds: [embed]}) 
         })

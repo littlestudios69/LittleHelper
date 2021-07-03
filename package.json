@@ -4,7 +4,7 @@
     "description": "Defected Bot is a Discord.js v12 bot template which features a command & event handler, command cooldown, changeable prefix with MongoDB & more.",
     "main": "app.js",
     "dependencies": {
-        "axios": "^0.21.0",
+        "axios": "^0.21.1",
         "cat-loggr": "^1.2.2",
         "chalk": "^4.1.0",
         "date": "^1.0.2",
