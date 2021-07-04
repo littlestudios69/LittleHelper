@@ -23,7 +23,7 @@ module.exports.execute = async(bot, msg, args, data) => {
             let embed = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle('Updated language!')
-            .setDescription(`The City has been added successfully set to "\`${args.join(" ")}\`"!`);
+            .setDescription(`The Language has been added successfully set to "\`${args.join(" ")}\`"!`);
     
         return msg.channel.send({embeds: [embed]}) 
         })

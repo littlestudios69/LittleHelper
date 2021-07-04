@@ -7,6 +7,6 @@ module.exports = mongoose.model('User', new mongoose.Schema({
     reminder: {type : Array},
     city: {type: String},
     lists: {type: Array},
-    language: {type: String}
-
+    language: {type: String},
+    temptype: {type: String}
 }));

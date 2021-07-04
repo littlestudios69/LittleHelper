@@ -17,14 +17,19 @@ module.exports = {
 module.exports.execute = async (bot, msg, args, data) => {
     try {
         let text = ``
-        data.user.todos.forEach(todo => {
-            let city = ""
+        let city = ""
         if(data.user.city === undefined) city = "New York"
         else city = data.user.city
+        let timeformat = ""
         await require("axios")({
             url: "http://api.weatherapi.com/v1/current.json?key=a815dcc598db4709869184846202108&q=" + city,
             method: "GET"
         }).then(async (b) => {
+
+        })
+        data.user.todos.forEach(async(todo) => {
+           
+      
             
     
     
@@ -39,7 +44,7 @@ module.exports.execute = async (bot, msg, args, data) => {
                      Added: ${todo.added}
                      Prior: ${todo.prior}\n\n`
                     })
-        });
+        
 
         let embed = new Discord.MessageEmbed()
             .setColor('GREEN')

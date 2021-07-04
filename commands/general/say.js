@@ -17,5 +17,5 @@ module.exports.execute = async(bot, msg, args, data) => {
     if(text == '')
         text = 'imagine sending an empty message';
 
-    return msg.channel.send({embeds: [text]})
+    return msg.channel.send(text)
 }
