@@ -14,7 +14,7 @@ module.exports = {
 }
 
 module.exports.execute = async (bot, msg, args, data) => {
-
+    if(data.user.city === undefined) return msg.reply("Please set your city with `set-city`!")
     console.log(data.user)
     require("axios")({
         url: "http://api.weatherapi.com/v1/current.json?key=a815dcc598db4709869184846202108&q=" + data.user.city,

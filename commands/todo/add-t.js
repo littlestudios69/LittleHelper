@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const embeds = require('../../helpers/embeds.js');
-let date = new Date()
+
 
 module.exports = {
     name: 'add-d',
@@ -19,20 +19,36 @@ module.exports.execute = async(bot, msg, args, data) => {
     if(!args[0]){
         return embeds.args(msg, "todo")
     }else {
+        let city = ""
+        if(data.user.city === undefined) city = "New York"
+        else city = data.user.city
+        await require("axios")({
+            url: "http://api.weatherapi.com/v1/current.json?key=a815dcc598db4709869184846202108&q=" + city,
+            method: "GET"
+        }).then(async (b) => {
+            
+    
+    
+    
+            let CurrentTime = new Date().toLocaleString("en-US", {
+                timeZone: b.data.location.tz_id
+            });
         data.user.todos.push({
             name: args.join(" "),
             mark: "unfinished",
-            added: date.now,
+            added: CurrentTime,
             prior: "-"
         })
-        data.user.save().then(()=>{
+        await data.user.save()
+    })
+        
             let embed = new Discord.MessageEmbed()
             .setColor('GREEN')
             .setTitle('Added todo!')
             .setDescription(`The todo "\`${args.join(" ")}\`" has been added successfully!`);
     
         return msg.channel.send({embeds: [embed]}) 
-        })
+        
     }
     }catch(err){
         bot.logger.error(err)
