@@ -7,7 +7,7 @@ module.exports = {
     usage: 'today',
     aliases: [],
     permissions: [],
-    botPermissions: [],
+    botPermissions: ["EMBED_LINKS", "SEND_MESSAGES","READ_MESSAGE_HISTORY","ATTACH_FILES"],
     nsfw: false,
     cooldown: 0,
     ownerOnly: false
@@ -110,6 +110,19 @@ module.exports.execute = async (bot, msg, args, data) => {
         if (tomuch) todos += `:small_blue_diamond: *and ${data.user.todos.length - 10} more*`
         if (data.user.todos.length === 0) todos = ":small_blue_diamond: Looks like you have done everything that you wanted todo!"
 
+        let notes = ""
+        let tomuch2 = false
+        if (data.user.notes.length > 10) tomuch = true
+
+        let num2= 0
+        data.user.notes.forEach(async (todo) => {
+            if (num2 > 9) return
+            num2++
+            notes += `:small_blue_diamond: **${todo}**\n`
+        })
+        if (tomuch) notes += `:small_blue_diamond: *and ${data.user.notes.length - 10} more*`
+        if (data.user.notes.length === 0) notes = ":small_blue_diamond: Looks like you have no notes!"
+
         let feelslike = ""
         let temp = ""
         if (data.user.temptype === "celsius") {
@@ -121,10 +134,9 @@ module.exports.execute = async (bot, msg, args, data) => {
         }
 
         hour = hour - 12;
-        console.log(b.data)
         const embed = new Discord.MessageEmbed()
             .setColor(bot.config.color)
-            .setDescription(`**${greeting}, ${msg.author}! ${GeneralLines[Math.floor(Math.random()*GeneralLines.length)]}**\n\n**Current Time:** ${CurrentTime}\n**Weather in ${data.user.city}:** ${b.data.current.condition.text} at ${temp} | Feels like: ${feelslike}.\n\|\|last updated at: ${b.data.current.last_updated}\|\|\n\n**Reminders:**\n🔹 Looks like you don't have any reminders set for today.\n\n**Todo:**\n${todos}`);
+            .setDescription(`**${greeting}, ${msg.author}! ${GeneralLines[Math.floor(Math.random()*GeneralLines.length)]}**\n\n**Current Time:** ${CurrentTime}\n**Weather in ${data.user.city}:** ${b.data.current.condition.text} at ${temp} | Feels like: ${feelslike}.\n\|\|last updated at: ${b.data.current.last_updated}\|\|\n\n**Notes:**\n${notes}\n\n**Todo:**\n${todos}`);
 
         return msg.channel.send({
             embeds: [embed]

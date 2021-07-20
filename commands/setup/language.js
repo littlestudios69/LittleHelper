@@ -7,7 +7,7 @@ module.exports = {
     usage: 'set-language <language>',
     aliases: ["set-l", "language"],
     permissions: [],
-    botPermissions: [],
+    botPermissions: ["EMBED_LINKS", "SEND_MESSAGES","READ_MESSAGE_HISTORY","ATTACH_FILES"],
     nsfw: false,
     cooldown: 0,
     ownerOnly: false
@@ -15,6 +15,7 @@ module.exports = {
 
 module.exports.execute = async(bot, msg, args, data) => {
     try{
+        msg.reply("This Command does not affect anything! It does in a future Update tho i hope!")
     if(!args[0]){
         return embeds.args(msg, "language")
     }else {

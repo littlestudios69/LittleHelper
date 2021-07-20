@@ -21,7 +21,6 @@ const bot = new Discord.Client({
 });
 const readdir = util.promisify(fs.readdir);
 let client = bot
-require("./structures.js");
 bot.events = new Discord.Collection();
 bot.commands = new Discord.Collection();
 bot.data = require('./database/MongoDB.js');

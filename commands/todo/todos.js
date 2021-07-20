@@ -4,9 +4,9 @@ let date = new Date
 
 module.exports = {
     name: 'todos',
-    description: 'Add a todo.',
-    usage: 'add-d <todo>',
-    aliases: ["td", "todo-list", "todolist"],
+    description: 'Show all todos.',
+    usage: 'todos',
+    aliases: ["td", "todo-list", "todolist", "todo"],
     permissions: [],
     botPermissions: [],
     nsfw: false,
@@ -26,7 +26,7 @@ module.exports.execute = async (bot, msg, args, data) => {
             method: "GET"
         }).then(async (b) => {
 
-        })
+        
         data.user.todos.forEach(async(todo) => {
            
       
@@ -54,6 +54,7 @@ module.exports.execute = async (bot, msg, args, data) => {
         return msg.channel.send({
             embeds: [embed]
         })
+    })
     } catch (err) {
         bot.logger.error(err)
     }

@@ -1,13 +1,22 @@
 module.exports = async (bot) => {
   try {
     let client = bot
-    bot.user.setPresence({
-      activity: {
-        name: 'tag me for info.',
-        type: 'PLAYING'
-      },
-      status: 'online'
-    });
+    let items = [
+      "with your Todos!",
+      "with beans!",
+      "with your Notes!",
+      "with the Weather!",
+      "with yo mama",
+      "with you",
+      "with the knife in the backyard"
+    ]
+    setInterval(function(){
+    
+    var item = items[Math.floor(Math.random()*items.length)];
+     client.user.setPresence({ activities: [{ name: `${item} | h!help` }] });
+  }, 20000)
+  var item = items[Math.floor(Math.random()*items.length)];
+  client.user.setPresence({ activities: [{ name: `${item} | h!help` }] });
     bot.logger.ready(bot.user.tag + ' initialized.');
   } catch (err) {
     bot.logger.error('Ready event error - ' + err);

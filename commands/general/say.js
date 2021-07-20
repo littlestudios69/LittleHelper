@@ -5,8 +5,8 @@ module.exports = {
     description: 'Repeats the defined message.',
     usage: 'say <message>',
     aliases: ['repeat'],
-    permissions: [],
-    botPermissions: [],
+    permissions: ["ADMINISTRATOR"],
+    botPermissions: ["EMBED_LINKS", "SEND_MESSAGES","READ_MESSAGE_HISTORY","ATTACH_FILES"],
     nsfw: false,
     cooldown: 0,
     ownerOnly: true

@@ -7,7 +7,7 @@ module.exports = {
     usage: 'add-n <note>',
     aliases: ["an", "notes-add", "add-note"],
     permissions: [],
-    botPermissions: [],
+    botPermissions: ["EMBED_LINKS", "SEND_MESSAGES","READ_MESSAGE_HISTORY","ATTACH_FILES"],
     nsfw: false,
     cooldown: 0,
     ownerOnly: false

@@ -29,12 +29,9 @@ module.exports.permissions = (message, cmdFile) => {
 };
 
 module.exports.botPermissions = (message, cmdFile) => {
-    let embed = new Discord.MessageEmbed()
-        .setColor('#ff0000')
-        .setTitle('Command restricted')
-        .setDescription('I am not allowed to use this command.\nRequired permissions: `' + cmdFile.botPermissions.join("`, `") + '`.');
+    
 
-    return message.channel.send({embeds: [embed]})
+    return message.channel.send('I am not allowed to use this command.\nRequired permissions: `' + cmdFile.botPermissions.join("`, `") + '`.')
 };
 
 module.exports.args = (message, arg) => {

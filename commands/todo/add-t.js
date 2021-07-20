@@ -3,9 +3,9 @@ const embeds = require('../../helpers/embeds.js');
 
 
 module.exports = {
-    name: 'add-d',
+    name: 'add-t',
     description: 'Add a todo.',
-    usage: 'add-d <todo>',
+    usage: 'add-t <todo>',
     aliases: ["ad", "todo-add", "add-todo"],
     permissions: [],
     botPermissions: [],

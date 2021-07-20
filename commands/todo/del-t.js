@@ -4,7 +4,7 @@ const embeds = require('../../helpers/embeds.js');
 module.exports = {
     name: 'del-t',
     description: 'Delete a todo.',
-    usage: 'del-n <note>',
+    usage: 'del-t <todo>',
     aliases: ["dt", "todos-del", "del-todo"],
     permissions: [],
     botPermissions: [],

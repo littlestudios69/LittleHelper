@@ -5,7 +5,7 @@ const cooldown = {};
 module.exports = async(bot, msg) => {
     try {
         if(msg.author.bot || !msg.guild) return;
-
+        let client = bot
         let guildDB = await bot.data.getGuildDB(msg.guild.id);
         let prefix = !guildDB.prefix ? bot.config.prefix : guildDB.prefix;
         let argsSlice = prefix.length;
@@ -28,13 +28,11 @@ module.exports = async(bot, msg) => {
         let cmdFile = bot.commands.get(command) || bot.commands.find(cmdFile => cmdFile.aliases && cmdFile.aliases.includes(command));
 
         if(!cmdFile) return;
-
         let userDB = await bot.data.getUserDB(msg.author.id);
         let data = {};
         data.user = userDB;
         data.guild = guildDB;
         data.cmdFile = cmdFile;
-
         if(!msg.channel.nsfw && cmdFile.nsfw)
             return embeds.nsfw(msg);
 
@@ -43,9 +41,10 @@ module.exports = async(bot, msg) => {
         if((cmdFile.permissions && !msg.member.permissions.has(cmdFile.permissions)) && !isOwner)
             return embeds.permissions(msg, cmdFile);
 
-        if(cmdFile.botPermissions && !msg.guild.me.permissions.has(cmdFile.botPermissions))
-            return embeds.botPermissions(msg, cmdFile);
+        if(cmdFile.botPermissions && !msg.guild.me.permissions.has(cmdFile.botPermissions) || cmdFile.botPermissions && !msg.channel.permissionsFor(client.user).has(cmdFile.botPermissions))
+        return embeds.botPermissions(msg, cmdFile);
 
+        if(!msg.channel.permissionsFor(client.user).has("SEND_MESSAGES")) return
         if(cmdFile.cooldown) {
             if(!cooldown[msg.author.id])
                 cooldown[msg.author.id] = {};

@@ -7,7 +7,7 @@ module.exports = {
     usage: 'show-n',
     aliases: ["sn", "notes-show"],
     permissions: [],
-    botPermissions: [],
+    botPermissions: ["EMBED_LINKS", "SEND_MESSAGES","READ_MESSAGE_HISTORY","ATTACH_FILES"],
     nsfw: false,
     cooldown: 0,
     ownerOnly: false

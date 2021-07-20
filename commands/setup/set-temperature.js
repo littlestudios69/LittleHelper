@@ -4,27 +4,23 @@ const embeds = require('../../helpers/embeds.js');
 module.exports = {
     name: 'set-temperature',
     description: 'Add the temperature type (°F/°C).',
-    usage: 'set-temperature <Celsius/F>',
+    usage: 'set-temperature <Celsius/Fahrenheit>',
     aliases: ["set-t", "temperature", "sttmp"],
     permissions: [],
-    botPermissions: [],
+    botPermissions: ["EMBED_LINKS", "SEND_MESSAGES","READ_MESSAGE_HISTORY","ATTACH_FILES"],
     nsfw: false,
     cooldown: 0,
     ownerOnly: false
 }
 
 module.exports.execute = async(bot, msg, args, data) => {
-    console.log("1")
     try{
     if(!args[0]){
         return embeds.args(msg, "temperature")
-        console.log("2")
     }else {
-        console.log("3")
-        if(!args[0] === "celsius" && "fahrenheit") return
-        console.log("4")
+        if(!args[0] === "celsius" && "fahrenheit") return msg.reply("Type needs to be `celcius` or `fahrenheit`")
 
-        data.user.temptype = args.join(" ")
+        data.user.temptype = args.join(" ").toLowerCase()
         data.user.save().then(()=>{
             let embed = new Discord.MessageEmbed()
             .setColor('GREEN')
