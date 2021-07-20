@@ -3,17 +3,16 @@ const moment = require('moment');
 
 exports.write = (content, type = 'log') => {
     let timestamp = '[' + moment().format('DD-MM-YY H:m:s') + ']:';
-    let typeUpper = type.toUpperCase();
-    let typeColor = chalk.blue(typeUpper);
+    let typeColor = chalk.blue(type);
     switch(type) {
-        case 'load': typeColor = chalk.magenta(typeUpper); break;
-        case 'event': typeColor = chalk.cyan(typeUpper); break;
-        case 'cmd': typeColor = chalk.gray(typeUpper); break;
-        case 'ready': typeColor = chalk.green(typeUpper); break;
-        case 'warn': typeColor = chalk.yellow(typeUpper); break;
-        case 'error': typeColor = chalk.red(typeUpper); break;
-        case 'debug': typeColor = chalk.green(typeUpper); break;
-        case 'log': typeColor = chalk.blue(typeUpper); break;
+        case 'load': typeColor = chalk.magenta(type); break;
+        case 'event': typeColor = chalk.cyan(type); break;
+        case 'cmd': typeColor = chalk.gray(type); break;
+        case 'ready': typeColor = chalk.green(type); break;
+        case 'warn': typeColor = chalk.yellow(type); break;
+        case 'error': typeColor = chalk.red(type); break;
+        case 'debug': typeColor = chalk.green(type); break;
+        case 'log': typeColor = chalk.blue(type); break;
     }
 
     return console.log(timestamp + ' ' + typeColor + ' ' + content);

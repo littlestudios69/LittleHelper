@@ -24,7 +24,7 @@ module.exports.execute = async(bot, msg, args, data) => {
             { name: 'Latency', value: bot.ws.ping + 'ms', inline: true },
             { name: 'Library', value: 'Discord.js V' + Discord.version }
         )
-        .addField("Version", "at16 | Alpha Testing Commit 16");
+        .addField("Version", "at16 | Alpha Testing Commit 18");
 
     return msg.channel.send({embeds: [embed]})
 };

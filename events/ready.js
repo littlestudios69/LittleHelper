@@ -13,10 +13,10 @@ module.exports = async (bot) => {
     setInterval(function(){
     
     var item = items[Math.floor(Math.random()*items.length)];
-     client.user.setPresence({ activities: [{ name: `${item} | h!help | V: at16` }] });
+     client.user.setPresence({ activities: [{ name: `${item} | h!help | V: at18` }] });
   }, 20000)
   var item = items[Math.floor(Math.random()*items.length)];
-  client.user.setPresence({ activities: [{ name: `${item} | h!help | V: at16` }] });
+  client.user.setPresence({ activities: [{ name: `${item} | h!help | V: at18` }] });
     bot.logger.ready(bot.user.tag + ' initialized.');
   } catch (err) {
     bot.logger.error('Ready event error - ' + err);

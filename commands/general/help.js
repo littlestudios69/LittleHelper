@@ -33,7 +33,7 @@ module.exports.execute = async(bot, msg, args, data) => {
         .addField(`Cooldown:`,`${cmdFile.cooldown}ms`, true)
         .addField(`Owner Only:`,`${cmdFile.ownerOnly}`, true)
 
-        .setDescription("Invite me here: https://discord.com/oauth2/authorize?client_id=860605194617225246&permissions=2214980673&scope=bot")
+        .setDescription("Click [here](https://discord.com/oauth2/authorize?client_id=860605194617225246&permissions=2214980673&scope=bot) to invite me")
         .setImage("https://cdn.tixte.com/uploads/tayron.steals-code.tk/krbwq63ab9a.png");
         return msg.channel.send({embeds: [embed]})
 
@@ -42,7 +42,7 @@ module.exports.execute = async(bot, msg, args, data) => {
         .setAuthor('Command list')
         .setFooter(bot.config.credits)
         .setColor(bot.config.color)
-        .setDescription("Invite me here: https://discord.com/oauth2/authorize?client_id=860605194617225246&permissions=2214980673&scope=bot")
+        .setDescription("Click [here](https://discord.com/oauth2/authorize?client_id=860605194617225246&permissions=2214980673&scope=bot) to invite me")
         .setImage("https://cdn.tixte.com/uploads/tayron.steals-code.tk/krbwq63ab9a.png");
     // Personally I would hardcode the help command, it gives much more flexibility than any of the automated options.
 
