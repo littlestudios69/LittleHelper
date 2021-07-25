@@ -71,7 +71,7 @@ module.exports.execute = async (bot, msg, args, data) => {
 
         let [day, month, year, hour, minute, second] = [time.getDate(), time.getMonth(), time.getFullYear(), formatNumber(time.getHours()), formatNumber(time.getMinutes()), formatNumber(time.getSeconds())];
 
-        let greeting = "Good Night"
+        let greeting = "Hello!"
         if (hour > 04) greeting = "Good Morning"
         if (hour > 12) greeting = "Good Day"
         if (hour > 18) greeting = "Good Evening"

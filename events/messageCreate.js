@@ -5,11 +5,12 @@ const cooldown = {};
 module.exports = async(bot, msg) => {
     try {
         if(msg.author.bot || !msg.guild) return;
+        console.log("triggered")
         let client = bot
         let guildDB = await bot.data.getGuildDB(msg.guild.id);
-        let prefix = !guildDB.prefix ? bot.config.prefix : guildDB.prefix;
+        let prefix = bot.config.prefix
         let argsSlice = prefix.length;
-
+        console.log("Args Slice")
         if(!msg.content.toLowerCase().startsWith(prefix.toLowerCase())) {
             let content = msg.content.trim();
             let mention1 = '<@!' + bot.user.id + '>';
@@ -24,9 +25,11 @@ module.exports = async(bot, msg) => {
         }
 
         let args = msg.content.slice(argsSlice).trim().split(/ +/g);
+        console.log("args")
         let command = args.shift().toLowerCase();
+        console.log("cmd")
         let cmdFile = bot.commands.get(command) || bot.commands.find(cmdFile => cmdFile.aliases && cmdFile.aliases.includes(command));
-
+console.log("triggered2")
         if(!cmdFile) return;
         let userDB = await bot.data.getUserDB(msg.author.id);
         let data = {};
@@ -44,7 +47,7 @@ module.exports = async(bot, msg) => {
         if(cmdFile.botPermissions && !msg.guild.me.permissions.has(cmdFile.botPermissions) || cmdFile.botPermissions && !msg.channel.permissionsFor(client.user).has(cmdFile.botPermissions))
         return embeds.botPermissions(msg, cmdFile);
 
-        if(!msg.channel.permissionsFor(client.user).has("SEND_MESSAGES")) return
+        if(!msg.channel.permissionsFor(client.user).has("SEND_MESSAGES")) return msg.reply("No Send Messages Perms")
         if(cmdFile.cooldown) {
             if(!cooldown[msg.author.id])
                 cooldown[msg.author.id] = {};
@@ -56,7 +59,7 @@ module.exports = async(bot, msg) => {
             }
             cooldown[msg.author.id][cmdFile.name] = Date.now() + cmdFile.cooldown;
         }
-
+console.log("executing")
         cmdFile.execute(bot, msg, args, data);
     } catch(err) {
         bot.logger.error('Command execution error - ' + err);

@@ -16,8 +16,10 @@ module.exports = {
 }
 
 module.exports.execute = async(bot, msg, args, data) => {
+console.log("yes")
     let prefix = !data.guild.prefix ? bot.config.prefix : data.guild.prefix;
     if(args[0]){
+    console.log("Args")
         let cmdFile = bot.commands.get(args[0]) || bot.commands.find(cmdFile => cmdFile.aliases && cmdFile.aliases.includes(args[0]));
         let embed = new Discord.MessageEmbed()
         .setAuthor('Command list')
@@ -38,6 +40,7 @@ module.exports.execute = async(bot, msg, args, data) => {
         return msg.channel.send({embeds: [embed]})
 
     }else{
+    console.log("No Args")
     let embed = new Discord.MessageEmbed()
         .setAuthor('Command list')
         .setFooter(bot.config.credits)

@@ -19,15 +19,12 @@ module.exports.execute = async(bot, msg, args, data) => {
         return embeds.args(msg, "Note")
     }else {
         let arr = data.user.notes
-        for( var i = 0; i < arr.length; i++){ 
-    
-            if ( arr[i].name === args.join(" ")) { 
-        
-                arr.splice(i, 1); 
-            }
-        
-        }
+      
+        let num = await arr.indexOf(args.join(""))   // Returns 2 
+                arr.splice(num, 1); 
+            
         data.user.notes = arr
+        console.log(arr)
         data.user.save().then(()=>{
             let embed = new Discord.MessageEmbed()
             .setColor('GREEN')
